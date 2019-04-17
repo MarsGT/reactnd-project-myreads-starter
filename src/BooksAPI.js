@@ -2,7 +2,7 @@
 const api = "https://reactnd-books-api.udacity.com"
 
 
-// Generate a unique token for storing your bookshelf data on the backend server.
+// 生成用于在后端服务器上存储书架数据的唯一标识。
 let token = localStorage.token
 if (!token)
   token = localStorage.token = Math.random().toString(36).substr(-8)

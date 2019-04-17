@@ -4,12 +4,10 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
+    // TODO: 不要使用这个状态变量跟踪我们所在的页面，
+    // 而是使用浏览器地址栏中的URL。
+    // 这将确保用户可以使用浏览器的后退和前进按钮进行页面导航，
+    // 同时提供一个可以收藏为书签和分享的好的网址。
     showSearchPage: false
   }
 
@@ -21,14 +19,12 @@ class BooksApp extends React.Component {
             <div className="search-books-bar">
               <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
               <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
+                { // NOTES: 注意: BooksAPI的搜索仅限于一些特定的词汇。
+                  // 你可以在此找到它们:
+                  // https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+                  //
+                  // 然而，请记住，BooksAPI.search方法可以通过标题或者作者搜索。所以，如果你没有找到一个具体的作者或者头衔也不用担心。每次搜索都受到 SEARCH_TERMS 的限制。
+                }
                 <input type="text" placeholder="Search by title or author"/>
 
               </div>
