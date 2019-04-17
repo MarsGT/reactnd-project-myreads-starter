@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchBooks from './SearchBooks'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -55,28 +56,17 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
+  onJumpToHome = () => {
+    this.setState(state => ({
+      showSearchPage: false
+    }))
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
-              <div className="search-books-input-wrapper">
-                { // NOTES: 注意: BooksAPI的搜索仅限于一些特定的词汇。
-                  // 你可以在此找到它们:
-                  // https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                  //
-                  // 然而，请记住，BooksAPI.search方法可以通过标题或者作者搜索。所以，如果你没有找到一个具体的作者或者头衔也不用担心。每次搜索都受到 SEARCH_TERMS 的限制。
-                }
-                <input type="text" placeholder="Search by title or author"/>
-
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+          <SearchBooks onNavigate={this.onJumpToHome} />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
