@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import SearchBooks from './SearchBooks'
 import ListBooks from './ListBooks'
 // import * as BooksAPI from './BooksAPI'
@@ -49,34 +50,17 @@ const books = {
 }
 
 class BooksApp extends React.Component {
-  state = {
-    // TODO: 不要使用这个状态变量跟踪我们所在的页面，
-    // 而是使用浏览器地址栏中的URL。
-    // 这将确保用户可以使用浏览器的后退和前进按钮进行页面导航，
-    // 同时提供一个可以收藏为书签和分享的好的网址。
-    showSearchPage: false
-  }
-
-  jumpToHome = () => {
-    this.setState(state => ({
-      showSearchPage: false
-    }))
-  }
-
-  jumpToSearch = () => {
-    this.setState(state => ({
-      showSearchPage: true
-    }))
-  }
+  state = {}
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks onNavigate={this.jumpToHome} />
-        ) : (
-          <ListBooks onNavigate={this.jumpToSearch} />
-        )}
+        <Route exact path='/' render={() => (
+          <ListBooks />
+        )} />
+        <Route exact path='/search' render={() => (
+          <SearchBooks />
+        )} />
       </div>
     )
   }
