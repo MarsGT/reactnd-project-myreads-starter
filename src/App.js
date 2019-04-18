@@ -16,7 +16,7 @@ class BooksApp extends Component {
         BooksAPI.getAll().then(books => {
             const currentlyReading =
                 books
-                    .filter((book) => (book.shelf == 'currentlyReading'))
+                    .filter((book) => (book.shelf === 'currentlyReading'))
                     .map((book) => ({
                         "cover": book.imageLinks.thumbnail,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
@@ -24,7 +24,7 @@ class BooksApp extends Component {
                     }))
             const wantToRead =
                 books
-                    .filter((book) => (book.shelf == 'wantToRead'))
+                    .filter((book) => (book.shelf === 'wantToRead'))
                     .map((book) => ({
                         "cover": book.imageLinks.thumbnail,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
@@ -32,7 +32,7 @@ class BooksApp extends Component {
                     }))
             const read =
                 books
-                    .filter((book) => (book.shelf == 'read'))
+                    .filter((book) => (book.shelf === 'read'))
                     .map((book) => ({
                         "cover": book.imageLinks.thumbnail,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
