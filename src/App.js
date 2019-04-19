@@ -18,7 +18,7 @@ class BooksApp extends Component {
                 books
                     .filter((book) => (book.shelf === 'currentlyReading'))
                     .map((book) => ({
-                        "cover": book.imageLinks.thumbnail,
+                        "cover": book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                         "authors": book.authors.join(', ')
                     }))
@@ -26,7 +26,7 @@ class BooksApp extends Component {
                 books
                     .filter((book) => (book.shelf === 'wantToRead'))
                     .map((book) => ({
-                        "cover": book.imageLinks.thumbnail,
+                        "cover": book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                         "authors": book.authors.join(', ')
                     }))
@@ -34,7 +34,7 @@ class BooksApp extends Component {
                 books
                     .filter((book) => (book.shelf === 'read'))
                     .map((book) => ({
-                        "cover": book.imageLinks.thumbnail,
+                        "cover": book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                         "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                         "authors": book.authors.join(', ')
                     }))
