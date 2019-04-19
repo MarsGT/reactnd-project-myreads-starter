@@ -11,7 +11,12 @@ class SearchBooks extends Component {
 
     searchBooks = () => {
         const result = 20; // Result结果数量最大值
-        BooksAPI.search(this.state.query, result).then(books => {
+        const { query } = this.state
+
+        if (query.length === 0)
+            return
+
+        BooksAPI.search(query, result).then(books => {
             const listBooks =
                 books
                     .map((book) => ({
@@ -45,7 +50,7 @@ class SearchBooks extends Component {
                             type='text'
                             value={query}
                             placeholder='Search by title or author'
-                            onKeyPress={event => this.handleKeyPress(event.nativeEvent.key)}
+                            onKeyPress={event => this.handleKeyPress(event.key)}
                             onChange={event => this.updateQuery(event.target.value)}
                         />
                     </div>
