@@ -31,8 +31,8 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        {shelfList.map((shelf) => (
-                            <BookShelf shelf={shelf} books={listBooks} />
+                        {shelfList.map((shelf, key) => (
+                            <BookShelf key={key} shelf={shelf} books={listBooks} />
                         ))}
                     </div>
                 </div>
