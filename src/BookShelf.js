@@ -10,8 +10,8 @@ class BookShelf extends Component {
                 <h2 className="bookshelf-title">{shelf.show}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {books[shelf.id].map(book => (
-                            <Book currentBook={book} />
+                        {books[shelf.id].map((book, key) => (
+                            <Book key={key} currentBook={book} />
                         ))}
                     </ol>
                 </div>
