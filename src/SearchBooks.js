@@ -28,14 +28,28 @@ class SearchBooks extends Component {
         })
     }
 
+    // 过滤Enter提交搜索内容
     handleKeyPress = (k) => {
         if (k === 'Enter') {
             this.searchBooks()
         }
     }
 
+    handleInvalid = (e) => {
+        console.log(e)
+        // if (this.state.textInput.validity.typeMismatch) {
+        //     this.state.textInput.setCustomValidity('!!!');
+        // } else {
+        //     this.state.textInput.setCustomValidity('');
+        // }
+    }
+
     updateQuery = (query) => {
         this.setState({ query: query.trim() })
+    }
+
+    clearQuery = () => {
+        this.setState({ query: '' })
     }
 
     render() {
@@ -50,8 +64,10 @@ class SearchBooks extends Component {
                             type='text'
                             value={query}
                             placeholder='Search by title or author'
+                            pattern='[A-Za-z]'
                             onKeyPress={event => this.handleKeyPress(event.key)}
                             onChange={event => this.updateQuery(event.target.value)}
+                            onInvalid={event => this.handleInvalid(event)}
                         />
                     </div>
                 </div>
