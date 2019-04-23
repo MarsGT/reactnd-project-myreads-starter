@@ -20,9 +20,10 @@ class SearchBooks extends Component {
                     const listBooks =
                         books
                             .map((book) => ({
-                                "cover": book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
-                                "title": book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
-                                "authors": book.authors.join(', ')
+                                cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
+                                title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
+                                authors: book.authors.join(', '),
+                                id: book.id
                             }))
                     this.setState({ listBooks })
                 }
