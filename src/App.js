@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import SearchBooks from './SearchBooks'
 import ListBooks from './ListBooks'
 import * as BooksAPI from './BooksAPI'
@@ -45,14 +45,16 @@ class BooksApp extends Component {
     render() {
         return (
             <div className="app">
-                <Route exact path='/' render={() => (
-                    <ListBooks
-                        listBooks={this.state}
-                    />
-                )} />
-                <Route exact path='/search' render={() => (
-                    <SearchBooks />
-                )} />
+                <Switch>
+                    <Route exact path='/' render={() => (
+                        <ListBooks listBooks={this.state} />
+                    )} />
+                </Switch>
+                <Switch>
+                    <Route path='/search' render={() => (
+                        <SearchBooks />
+                    )} />
+                </Switch>
             </div>
         )
     }
