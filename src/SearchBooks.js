@@ -16,7 +16,7 @@ class SearchBooks extends Component {
 
         if (query.length > 0) { // 请求校验
             BooksAPI.search(query, result).then(books => {
-                if (books.length > 0) {
+                if (books.length > 0) { // 如果结果为空就不渲染
                     const listBooks =
                         books
                             .map((book) => ({
