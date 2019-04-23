@@ -26,6 +26,8 @@ class SearchBooks extends Component {
                                 id: book.id
                             }))
                     this.setState({ listBooks })
+                } else {
+                    this.setState({ listBooks: [] })
                 }
             })
         }
@@ -69,9 +71,9 @@ class SearchBooks extends Component {
                 </div>
                 <div className='search-books-results'>
                     <ol className='books-grid'>
-                        {listBooks.map((book, key) => (
+                        {listBooks.length > 0 && (listBooks.map((book, key) => (
                             <Book key={key} currentBook={book} />
-                        ))}
+                        )))}
                     </ol>
                 </div>
             </div>
