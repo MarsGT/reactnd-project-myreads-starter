@@ -10,15 +10,6 @@ body, .app {
   background: white;
 }
 
-/* 表单校验样式 */
-input:invalid {
-  box-shadow: 0 0 5px 1px red;
-}
-
-input:focus:invalid {
-  outline: none;
-}
-
 /* main page */
 
 .list-books-title {
