@@ -33,6 +33,16 @@ class SearchBooks extends Component {
         }
     }
 
+    // 调用API将图书加入书架
+    handleMoveBook = (ev, id) => {
+        const bookShelf = ev.target.value
+        BooksAPI
+            .update({ id }, bookShelf)
+            .then(() => {
+                this.updateList(id)
+            })
+    }
+
     // 过滤Enter提交搜索内容
     handleKeyPress = (ev) => {
         const key = ev.key
@@ -50,6 +60,15 @@ class SearchBooks extends Component {
     // 清空state中的query字段
     clearQuery = () => {
         this.setState({ query: '' })
+    }
+
+    // 加入书架操作后更新图书列表(删掉已加入的书)
+    updateList = (deleteID) => {
+        const oldList = this.state.list
+        const list = oldList.filter((book) => (
+            book.id !== deleteID
+        ))
+        this.setState({ list })
     }
 
     render() {
@@ -72,7 +91,7 @@ class SearchBooks extends Component {
                 <div className='search-books-results'>
                     <ol className='books-grid'>
                         {listBooks.length > 0 && (listBooks.map((book, key) => (
-                            <Book key={key} currentBook={book} />
+                            <Book key={key} currentBook={book} onMoveBook={this.handleMoveBook} />
                         )))}
                     </ol>
                 </div>
