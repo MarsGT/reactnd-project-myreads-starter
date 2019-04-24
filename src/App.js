@@ -13,36 +13,50 @@ class BooksApp extends Component {
     }
 
     componentDidMount() {
-        BooksAPI.getAll().then(books => {
-            const currentlyReading =
+        BooksAPI
+            .getAll()
+            .then(books => {
+                const list = this.state
                 books
-                    .filter((book) => (book.shelf === 'currentlyReading'))
-                    .map((book) => ({
-                        cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
-                        title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
-                        authors: book.authors.join(', '),
-                        id: book.id
-                    }))
-            const wantToRead =
-                books
-                    .filter((book) => (book.shelf === 'wantToRead'))
-                    .map((book) => ({
-                        cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
-                        title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
-                        authors: book.authors.join(', '),
-                        id: book.id
-                    }))
-            const read =
-                books
-                    .filter((book) => (book.shelf === 'read'))
-                    .map((book) => ({
-                        cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
-                        title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
-                        authors: book.authors.join(', '),
-                        id: book.id
-                    }))
-            this.setState({ currentlyReading, wantToRead, read })
-        })
+                    .forEach((book) => (
+                        list[book.shelf].push({
+                            cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
+                            title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
+                            authors: book.authors.join(', '),
+                            id: book.id
+                        })
+                    ))
+                this.setState({ ...list })
+            })
+    }
+
+    handleMoveBook = (ev, id) => {
+        const bookShelf = ev.target.value
+        BooksAPI
+            .update({ id }, bookShelf)
+            .then((booksIDs) => {
+                const list = {
+                    currentlyReading: [],
+                    wantToRead: [],
+                    read: []
+                }
+                for (var shelf in booksIDs) {
+                    booksIDs[shelf]
+                        .forEach((id) => {
+                            const bookInfo =
+                                BooksAPI
+                                    .get(id)
+                                    .then((book) => ({
+                                        cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
+                                        title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
+                                        authors: book.authors.join(', '),
+                                        id: book.id
+                                    }))
+                            list[shelf].push(bookInfo)
+                        })
+                }
+                this.setState({ ...list })
+            })
     }
 
     render() {
@@ -50,12 +64,12 @@ class BooksApp extends Component {
             <div className="app">
                 <Switch>
                     <Route exact path='/' render={() => (
-                        <ListBooks listBooks={this.state} />
+                        <ListBooks listBooks={this.state} onMoveBook={this.handleMoveBook} />
                     )} />
                 </Switch>
                 <Switch>
                     <Route path='/search' render={() => (
-                        <SearchBooks />
+                        <SearchBooks onMoveBook={this.handleMoveBook} />
                     )} />
                 </Switch>
             </div>
