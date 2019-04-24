@@ -40,7 +40,7 @@ class BooksApp extends Component {
                     wantToRead: [],
                     read: []
                 }
-                for (var shelf in booksIDs) {
+                for (let shelf in booksIDs) {
                     booksIDs[shelf]
                         .forEach((id) => {
                             const bookInfo =
