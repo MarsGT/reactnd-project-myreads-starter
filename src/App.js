@@ -40,22 +40,28 @@ class BooksApp extends Component {
                     wantToRead: [],
                     read: []
                 }
+                const task = []
                 for (let shelf in booksIDs) {
-                    booksIDs[shelf]
-                        .forEach((id) => {
-                            const bookInfo =
+                    let child = 
+                        booksIDs[shelf]
+                            .map((id) => (
                                 BooksAPI
                                     .get(id)
-                                    .then((book) => ({
-                                        cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
-                                        title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
-                                        authors: book.authors.join(', '),
-                                        id: book.id
-                                    }))
-                            list[shelf].push(bookInfo)
-                        })
+                                    .then((book) => {
+                                        list[shelf].push({
+                                            cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
+                                            title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
+                                            authors: book.authors.join(', '),
+                                            id: book.id
+                                        })
+                                    })
+                            ))
+                    task.push(Promise.all(child))
                 }
-                this.setState({ ...list })
+                let done = Promise.all(task)
+                done.then(() => (
+                    this.setState({ ...list })
+                ))
             })
     }
 
