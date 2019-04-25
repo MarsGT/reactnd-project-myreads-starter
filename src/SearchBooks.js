@@ -35,11 +35,13 @@ class SearchBooks extends Component {
 
     // 调用API将图书加入书架
     handleMoveBook = (ev, id) => {
+        const { updateBooksInfo } = this.props
         const bookShelf = ev.target.value
         BooksAPI
             .update({ id }, bookShelf)
             .then(() => {
                 this.updateList(id)
+                updateBooksInfo()
             })
     }
 

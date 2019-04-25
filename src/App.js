@@ -13,10 +13,18 @@ class BooksApp extends Component {
     }
 
     componentDidMount() {
+        this.updateBooksInfo()
+    }
+
+    updateBooksInfo = () => {
         BooksAPI
             .getAll()
             .then(books => {
-                const list = this.state
+                const list = {
+                    currentlyReading: [],
+                    wantToRead: [],
+                    read: []
+                }
                 books
                     .forEach((book) => (
                         list[book.shelf].push({
@@ -75,7 +83,7 @@ class BooksApp extends Component {
                 </Switch>
                 <Switch>
                     <Route path='/search' render={() => (
-                        <SearchBooks onMoveBook={this.handleMoveBook} />
+                        <SearchBooks onMoveBook={this.handleMoveBook} updateBooksInfo={this.updateBooksInfo}/>
                     )} />
                 </Switch>
             </div>
