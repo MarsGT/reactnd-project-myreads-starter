@@ -64,11 +64,11 @@ class SearchBooks extends Component {
 
     // 加入书架操作后更新图书列表(删掉已加入的书)
     updateList = (deleteID) => {
-        const oldList = this.state.list
-        const list = oldList.filter((book) => (
+        const oldList = this.state.listBooks
+        const listBooks = oldList.filter((book) => (
             book.id !== deleteID
         ))
-        this.setState({ list })
+        this.setState({ listBooks })
     }
 
     render() {
