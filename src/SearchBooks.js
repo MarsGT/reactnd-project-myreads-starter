@@ -53,8 +53,8 @@ class SearchBooks extends Component {
 
     // 更新state中的query字段
     updateQuery = (ev) => {
-        const query = ev.target.value
-        this.setState({ query: query.trim() })
+        const query = ev.target.value.trim()
+        this.setState({ query })
     }
 
     // 清空state中的query字段
