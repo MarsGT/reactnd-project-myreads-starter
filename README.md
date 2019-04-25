@@ -5,46 +5,8 @@
 ## 如何安装并启动本项目
 
 - 在命令行克隆本项目 `git clone https://github.com/marsgt/reactnd-project-myreads-starter.git`
-- 使用 `npm install` 或 `yarn install` 安装所有的项目依赖
-- 然后运行 `npm start` 或 `yarn start` 启动开发服务器
-
-## 后台服务
-
-该应用使用了Udacity的后端API。所有的接口均在[`BooksAPI.js`](src/BooksAPI.js)文件中有所体现。以下是所有接口及简要说明：
-
-- [`getAll`](#getall)
-- [`update`](#update)
-- [`search`](#search)
-
-### `getAll`
-
-```js
-getAll()
-```
-
-- 返回一个 Promise，它解析成一个包含 book 对象集合的 JSON 对象。
-- 此集合代表了应用里书架中的图书。
-
-### `update`
-
-```js
-update(book, shelf)
-```
-
-- book: 类型为`<Object>`，并包含至少一个 `id` 属性
-- shelf: 类型为`<String>`，包含 ["wantToRead", "currentlyReading", "read"] 其中之一
-- 返回一个 Promise，它解析为包含POST请求的响应数据的JSON对象
-
-### `search`
-
-```js
-search(query, maxResults)
-```
-
-- query: 类型为`<String>`，
-- maxResults: 类型为`<Integer>`。由于后端限制，该值的最高上限为20。
-- 返回一个Promise，它解析成一个包含book对象集合的JSON对象。
-- 搜索结果中并不包含相应的书架信息，它们只是一个图书的结果集。
+- 使用 `npm install` 或 `yarn install` （推荐后者）安装所有的项目依赖
+- 然后运行 `npm start` 或 `yarn start` （推荐后者）启动开发服务器
 
 ## 关于搜索功能的特别提示
 
