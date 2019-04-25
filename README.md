@@ -5,9 +5,9 @@
 ## 如何安装并启动本项目
 
 - 在命令行克隆本项目 `git clone https://github.com/marsgt/reactnd-project-myreads-starter.git`
-- 使用 `npm install` 或 `yarn install` （推荐后者）安装所有的项目依赖
-- 最后运行 `npm start` 或 `yarn start` （推荐后者），将启动项目（开发服务器）
-- 可以使用 `npm build` 或 `yarn build`，将本项目编译为可在生产环境下部署的静态文件
+- 使用`cd reactnd-project-myreads-starter`切换到根目录下，运行`npm install`或`yarn install`（推荐后者）安装所有的项目依赖
+- 最后运行`npm start`或`yarn start`（推荐后者），将启动项目（开发服务器）并直接打开网页
+- 可以使用`npm run build`或`yarn build`，将本项目编译为可在生产环境下部署的静态文件
 
 ## 使用说明
 
