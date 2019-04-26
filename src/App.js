@@ -42,7 +42,10 @@ class BooksApp extends Component {
 
     // 移动图书操作
     handleMoveBook = (ev, id) => {
-        const bookShelf = ev.target.value
+        const target = ev.target
+        console.log(target)
+        const bookShelf = target.value
+        target.parentNode.classList.add('moving')
         BooksAPI
             .update({ id }, bookShelf)
             .then((booksIDs) => {
