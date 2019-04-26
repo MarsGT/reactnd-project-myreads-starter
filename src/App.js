@@ -16,6 +16,7 @@ class BooksApp extends Component {
         this.updateBooksInfo()
     }
 
+    // 更新在架图书信息（进入主页和搜索后）
     updateBooksInfo = () => {
         BooksAPI
             .getAll()
@@ -38,6 +39,7 @@ class BooksApp extends Component {
             })
     }
 
+    // 移动图书操作
     handleMoveBook = (ev, id) => {
         const bookShelf = ev.target.value
         BooksAPI
