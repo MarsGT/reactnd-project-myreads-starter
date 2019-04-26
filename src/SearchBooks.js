@@ -85,6 +85,7 @@ class SearchBooks extends Component {
                     <div className='search-books-input-wrapper'>
                         <input
                             type='text'
+                            autoFocus
                             value={query}
                             placeholder='Search by title or author'
                             onKeyPress={this.handleKeyPress}
