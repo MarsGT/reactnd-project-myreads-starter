@@ -13,6 +13,7 @@ class SearchBooks extends Component {
     searchBooks = () => {
         const result = 20; // Result结果数量最大值
         const { query } = this.state
+        const { queryShelf } = this.props
 
         if (query.length > 0) { // 请求校验
             BooksAPI.search(query, result).then(books => {
@@ -23,7 +24,8 @@ class SearchBooks extends Component {
                                 cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                                 title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                                 authors: book.authors ? book.authors.join(', ') : '',
-                                id: book.id
+                                id: book.id,
+                                shelf: queryShelf(book.id) || 'none'
                             }))
                     this.setState({ listBooks })
                 } else {
@@ -75,9 +77,6 @@ class SearchBooks extends Component {
 
     render() {
         const { query, listBooks } = this.state
-        const curShelf = {
-            id: ''
-        }
 
         return (
             <div className='search-books'>
@@ -96,7 +95,7 @@ class SearchBooks extends Component {
                 <div className='search-books-results'>
                     <ol className='books-grid'>
                         {listBooks.length > 0 && (listBooks.map((book, key) => (
-                            <Book key={key} currentBook={book} currentShelf={curShelf} onMoveBook={this.handleMoveBook} />
+                            <Book key={key} currentBook={book} onMoveBook={this.handleMoveBook} />
                         )))}
                     </ol>
                 </div>

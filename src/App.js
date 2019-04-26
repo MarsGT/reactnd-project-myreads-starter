@@ -32,7 +32,8 @@ class BooksApp extends Component {
                             cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                             title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                             authors: book.authors ? book.authors.join(', ') : '',
-                            id: book.id
+                            id: book.id,
+                            shelf: book.shelf
                         })
                     ))
                 this.setState({ ...list })
@@ -52,7 +53,7 @@ class BooksApp extends Component {
                 }
                 const task = []
                 for (let shelf in booksIDs) {
-                    let child = 
+                    let child =
                         booksIDs[shelf]
                             .map((id) => (
                                 BooksAPI
@@ -62,7 +63,8 @@ class BooksApp extends Component {
                                             cover: book.imageLinks ? book.imageLinks.thumbnail : `https://books.google.com/googlebooks/images/no_cover_thumb.gif`,
                                             title: book.title + (book.subtitle ? `: ${book.subtitle}` : ''),
                                             authors: book.authors.join(', '),
-                                            id: book.id
+                                            id: book.id,
+                                            shelf: shelf
                                         })
                                     })
                             ))
@@ -76,6 +78,19 @@ class BooksApp extends Component {
             })
     }
 
+    // 查询图书所在书架
+    queryShelf = (bookID) => {
+        // TODO
+        const books = this.state
+        for (let shelf in books) {
+            let q = books[shelf].findIndex(book => book.id === bookID)
+            if (q !== -1) {
+                return shelf
+            }
+        }
+        return 'none'
+    }
+
     render() {
         return (
             <div className="app">
@@ -86,7 +101,7 @@ class BooksApp extends Component {
                 </Switch>
                 <Switch>
                     <Route path='/search' render={() => (
-                        <SearchBooks onMoveBook={this.handleMoveBook} updateBooksInfo={this.updateBooksInfo}/>
+                        <SearchBooks onMoveBook={this.handleMoveBook} updateBooksInfo={this.updateBooksInfo} queryShelf={this.queryShelf} />
                     )} />
                 </Switch>
             </div>
