@@ -68,10 +68,11 @@ class BooksApp extends Component {
                             ))
                     task.push(Promise.all(child))
                 }
-                let done = Promise.all(task)
-                done.then(() => (
-                    this.setState({ ...list })
-                ))
+                Promise
+                    .all(task)
+                    .then(() => (
+                        this.setState({ ...list })
+                    ))
             })
     }
 
